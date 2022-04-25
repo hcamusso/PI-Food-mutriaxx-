@@ -1,0 +1,104 @@
+.container{
+    margin-top: 30px;
+    padding-top: 10px;
+    /* background-color: red; */
+    position: sticky;
+    top: 0;
+    z-index: 3;
+}
+.input {
+    padding: 9px;
+    /* width: fit-content; */
+    font-size: 16px;
+    border-width: 1px;
+    border-color: #CCCCCC;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-style: solid;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px rgba(66,66,66,.0);
+    text-shadow: -50px 0px 0px rgba(66,66,66,.0);
+    margin-right: 10px;
+}
+
+.button {
+	box-shadow:inset 0px 1px 0px 0px #f7c5c0;
+	background:linear-gradient(to bottom, #ee362d 5%, #fc4141 100%);
+	background-color:#ee362d;
+	border-radius:6px;
+	border:1px solid #d83526;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:9px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+    margin-right: 10px;
+}
+.button:hover {
+	background:linear-gradient(to bottom, #fa8078 5%, #fc8d83 100%);
+	background-color:#fa8078;
+}
+.button:active {
+	position:relative;
+	top:1px;
+}
+
+.select {
+	margin-right: 10px;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+    width: 150px;
+    border-color: #CCCCCC;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 7px;
+
+}    .select select {
+        font-family: 'Arial';
+        display: inline-block;
+        width: 100%;
+        cursor: pointer;
+        padding: 9px 16px;
+        outline: 0;
+		font-size: 16px;
+        border: 0px solid #000000;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #000000;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+        .select select::-ms-expand {
+            display: none;
+        }
+        .select select:hover,
+        .select select:focus {
+            color: #000000;
+            background: #f4f4f4;
+        }
+        .select select:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+.select_arrow {
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    pointer-events: none;
+    border-style: solid;
+    border-width: 15px 10px 0px 10px;
+    border-color: #7b7b7b transparent transparent transparent;
+}
+.select select:hover ~ .select_arrow,
+.select select:focus ~ .select_arrow {
+    border-top-color: #000000;
+}
+.select select:disabled ~ .select_arrow {
+    border-top-color: #cccccc;
+}
