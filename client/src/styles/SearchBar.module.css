@@ -20,6 +20,9 @@
     text-shadow: -50px 0px 0px rgba(66,66,66,.0);
     margin-right: 10px;
 }
+.input:focus{
+    border-color: #3d3d3d;
+}
 
 .button {
 	box-shadow:inset 0px 1px 0px 0px #f7c5c0;
@@ -87,6 +90,7 @@
             pointer-events: none;
         }
 .select_arrow {
+    background: url('../styles/images/sort.png');
     position: absolute;
     top: 8px;
     right: 9px;

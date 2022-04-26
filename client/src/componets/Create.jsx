@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { createRecipe, getDiets, getAllRecipes } from "../redux/actions";
 import styles from '../styles/Create.module.css'
 import Modal from './Modal'
+import chefcito from '../styles/images/chefcito.png'
 
 class Create extends React.Component {
     constructor(props){
@@ -44,31 +45,41 @@ class Create extends React.Component {
             errors: {}
         }, () => {
             let errors = {};
+            let regularExpresion =  /^[a-zA-Z ]+$/gm;
         // console.log(input.title)
+        if(!regularExpresion.test(this.state.title)){
+            errors.title = 'Title is not valid'
+        }
         if(!this.state.title){
-            errors.title = 'Title is required';
+            errors.title = 'This field is required';
         }else if(!isNaN(this.state.title)){
-            errors.title = 'No puede ser numeroooo'
+            errors.title = 'Only letters'
         }
         
         if(!this.state.summary){
-            errors.summary = 'Summary is required';
+            errors.summary = 'This field is required';
         }
         
         if(this.state.score < 1 || isNaN(this.state.score)){
-            errors.score = 'Score debe ser mayor o igual a 1';
+            errors.score = 'Score should be greater than 0';
+        }
+        if(this.state.score > 100 || isNaN(this.state.score)){
+            errors.score = 'Score should be no longer than 100';
         }
         
         if(this.state.healthScore < 1 || isNaN(this.state.healthScore)){
-            errors.healthScore = 'Health Score debe ser un numero mayor o igual a 1';
+            errors.healthScore = 'Health Score should be greater than 0';
+        }
+        if(this.state.healthScore > 100){
+            errors.healthScore = 'Health Score should be no longer than 100'
         }
         
         if(!this.state.steps){
-            errors.steps = 'Instructions are required.';
+            errors.steps = 'This field is required';
         }
         
         if(!this.state.diets.includes(true)){
-            errors.diets = 'Debe seleccionar al menos un tipo de dieta.';
+            errors.diets = ' You should select at least 1 diet.';
         }
         this.setState({
             ...this.state,
@@ -131,9 +142,12 @@ class Create extends React.Component {
       return (
           <div className={styles.root}>
                 <div className={styles.container}>
-                    <h1>Create your own recipe</h1>
-
-                    <p>Add a new recipe to CookBook.</p>
+                    
+                    <div className={styles.marco}>
+                    <img className={styles.image2} src={chefcito} alt="Create your own recipe" />
+                        <p>Create your own recipe</p> 
+                    </div>
+                    {/* <p>Add a new recipe to CookBook.</p> */}
                     <br />
                     <form className={styles.form}>
                         <label className={styles.label} htmlFor="">Title:</label>
@@ -146,7 +160,7 @@ class Create extends React.Component {
                             placeholder="Type the title" 
                             onChange={e => this.handlerInputChange(e)} 
                         />
-                        <label>{this.state.errors.title && this.state.errors.title}</label>
+                        <label className={styles.error}>{this.state.errors.title && this.state.errors.title}</label>
                         <br />
                         <label className={styles.label} htmlFor="">Summary:</label>
                         <textarea className={styles.input}
@@ -158,20 +172,21 @@ class Create extends React.Component {
                             rows="10" 
                             onChange={e => this.handlerInputChange(e)}>    
                         </textarea>
-                        <label>{this.state.errors.summary && this.state.errors.summary}</label>
+                        <label className={styles.error}>{this.state.errors.summary && this.state.errors.summary}</label>
 
                         <br />
                         <label className={styles.label}>Score:</label>
                         <input className={styles.input}
                             value={this.state.score}
-                            type="number"
+                            type="range"
                             min={1}
                             max={100} 
                             name="score" 
                             id="score"  
                             onChange={e => this.handlerInputChange(e)}
                         />
-                        <label>{this.state.errors.score && this.state.errors.score}</label>
+                        <label>{this.state.score}</label>
+                        <label className={styles.error}>{this.state.errors.score && this.state.errors.score}</label>
 
                         <br />
                         <label className={styles.label}>Health Score: </label>
@@ -179,12 +194,13 @@ class Create extends React.Component {
                             value={this.state.healthScore}
                             min={1}
                             max={100} 
-                            type="number" 
+                            type="range" 
                             name="healthScore" 
                             id="healthScore"  
                             onChange={e => this.handlerInputChange(e)}
                         />
-                        <label>{this.state.errors.healthScore && this.state.errors.healthScore}</label>
+                        <label>{this.state.healthScore}</label>
+                        <label className={styles.error}>{this.state.errors.healthScore && this.state.errors.healthScore}</label>
 
                         <br />
                         <label className={styles.label}>Instructions:</label>
@@ -196,7 +212,7 @@ class Create extends React.Component {
                             rows="10" 
                             onChange={e => this.handlerInputChange(e)}>    
                         </textarea>
-                        <label>{this.state.errors.steps && this.state.errors.steps}</label>
+                        <label className={styles.error}>{this.state.errors.steps && this.state.errors.steps}</label>
 
                         <br />
                         <label className={styles.label}>Image:</label>
@@ -225,10 +241,10 @@ class Create extends React.Component {
                                     
                                 )}
                             )}
-                        <label>{this.state.errors.diets && this.state.errors.diets}</label>
+                        <label className={styles.error}>{this.state.errors.diets && this.state.errors.diets}</label>
                         </div>
                         
-                        <button disabled={this.state.errors.title || this.state.errors.summary || this.state.errors.score || this.state.errors.healthScore || this.state.errors.steps || this.state.errors.diets || this.state.disabled ? true : false} onClick={(e)=> this.handlerSubmit(e)}>create</button>
+                        <button className={styles.button} disabled={this.state.errors.title || this.state.errors.summary || this.state.errors.score || this.state.errors.healthScore || this.state.errors.steps || this.state.errors.diets || this.state.disabled ? true : false} onClick={(e)=> this.handlerSubmit(e)}>create</button>
                         
                     </form>   
                 </div>

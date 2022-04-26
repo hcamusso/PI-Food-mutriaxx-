@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRecipeId } from '../redux/actions';
-// import Styles from '../styles/RecipeDetail.module.css'
+import styles from '../styles/RecipeDetail.module.css'
 
 export const RecipeDetail = (props) => {
   const recipe = useSelector(state => state.recipe);
@@ -13,22 +13,28 @@ export const RecipeDetail = (props) => {
         }
     }, [])
   return (
-    <div>
-      {recipe.error && <p>{recipe.error}</p>}
-        {recipe.title && <h2>{recipe.title}</h2>}
-        {recipe.image && <img src={recipe.image} alt={recipe.name}/>}
-        {<h2>Summary</h2>}
-        {recipe.summary && <p dangerouslySetInnerHTML={{ __html:recipe.summary}}/>}
-        {<h2>Diets</h2>}
-        {recipe.diets && recipe.diets.map((d,i) => <p key={i}>{d}</p>)}
-        {<h2>DishTypes</h2>}
-        {recipe.dishTypes && recipe.dishTypes.map((d,i) => <p key={i}>{d}</p>)}
-        {<h2>Score</h2>}
-        {recipe.score && <p>{recipe.score}</p>}
-        {<h2>Health Score</h2>}
-        {recipe.healthScore && <p>{recipe.healthScore}</p>}
-        {<h2>Steps</h2>}
-        {recipe.steps &&  <p dangerouslySetInnerHTML={{ __html:recipe.steps}}/>}
+    <div className={styles.fondo}>
+    <div className={styles.root}>
+      {recipe.error ? <p>Error 404: </p>: !recipe.hasOwnProperty('title')? <p>Cargando...</p> :
+        <div className={styles.container}>
+          <div className={styles.marco}><p className={styles.title}>{recipe.title}</p> </div>
+          <img className={styles.image} src={recipe.image} alt={recipe.title}/>
+          <h4 className={styles.subtitle}>Summary</h4>
+          <p className={styles.text} dangerouslySetInnerHTML={{ __html:recipe.summary}}/>
+          <h4 className={styles.subtitle}>Diets </h4>
+          {recipe.diets && <p className={styles.text}>{recipe.diets.join(', ')+'.'}</p>}
+          {recipe.dishTypes && <h4 className={styles.subtitle}>Dish Types</h4>}
+          {recipe.dishTypes && <p className={styles.text}>{recipe.dishTypes.join(', ')+'.'}</p>}
+          <div className={styles.table}>
+          <h4 className={styles.subtitle}>⭐</h4><p>{recipe.score}</p>
+          <h4 className={styles.subtitle}>🥑</h4><p>{recipe.healthScore}</p>
+          </div>
+          {recipe.steps && <h4 className={styles.subtitle}>Steps</h4>}
+          {recipe.steps &&  <p className={styles.text} dangerouslySetInnerHTML={{ __html:recipe.steps}}/>}
+        </div>
+      }
+
+    </div>
     </div>
   )
 }

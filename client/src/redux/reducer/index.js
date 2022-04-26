@@ -1,5 +1,5 @@
 // Importa las actions types que necesites acá:
-import { GET_ALL_RECIPES, GET_RECIPE_ID, GET_DIETS, GET_RECIPE_NAME, CLEAN_RECIPE, ORDER_FILTER, CREATE_RECIPE } from "../actions";
+import { GET_ALL_RECIPES, GET_RECIPE_ID, GET_DIETS, GET_RECIPE_NAME, CLEAN_RECIPE, ORDER_FILTER, CREATE_RECIPE, NO_HAY_BACKEND } from "../actions";
 
 
 const initialState = {
@@ -8,7 +8,8 @@ const initialState = {
     initial: [],
     recipe: {},
     diets: [],
-    info: {}
+    info: {},
+    backend: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -27,6 +28,12 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload
+            }
+        
+        case NO_HAY_BACKEND:
+            return {
+                ...state,
+                backend: action.payload
             }
         
         case GET_RECIPE_ID:

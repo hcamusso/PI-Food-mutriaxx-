@@ -18,47 +18,55 @@ const recipeList = async(req, res) => {
         .catch(e => console.log(e))
     ;
     
-    const recipe = response.results[0] && response.results.map(r => {
-        if(r.vegetarian && !r.diets.includes('vegetarian')) r.diets.push('vegetarian')
-        if(r.vegan && !r.diets.includes('vegan')) r.diets.push('vegan')
-        if(r.glutenFree && !r.diets.includes('gluten free')) r.diets.push('gluten free')
-        if(r.dairyFree && !r.diets.includes('dairy free')) r.diets.push('dairy free')
+    try {
+        const recipe = response.results[0] && response.results.map(r => {
+            if(r.vegetarian && !r.diets.includes('vegetarian')) r.diets.push('vegetarian')
+            if(r.vegan && !r.diets.includes('vegan')) r.diets.push('vegan')
+            if(r.glutenFree && !r.diets.includes('gluten free')) r.diets.push('gluten free')
+            if(r.dairyFree && !r.diets.includes('dairy free')) r.diets.push('dairy free')
+    
+            return  {
+                id: r.id,
+                image: r.image,
+                title: r.title,
+                diets: r.diets,
+                score: r.spoonacularScore
+            }
+        })
+    
+        const db = await Recipe.findAll({
+            attributes: ['id', 'image', 'title', 'score'],
+            include: {
+                model: Diet,
+                attributes: ['name'],
+                through: {attributes: []}
+            }
+    
+        })
 
-        return  {
-            id: r.id,
-            image: r.image,
-            title: r.title,
-            diets: r.diets,
-            score: r.spoonacularScore
+        db && db.map((r, i)=> recipe.push({
+            id: db[i].dataValues.id,
+            image: db[i].dataValues.image,
+            title: db[i].dataValues.title,
+            diets: db[i].dataValues.diets.map(d=> d.name),
+            score: db[i].dataValues.score
+        }))
+    
+        if(name){
+            let find = recipe && recipe.filter(r=> r.title.toLowerCase().includes(name.toLowerCase()));
+            if(find.length === 0) return res.status(404).json({error: 'No se encontró la receta.'});
+            else res.json(find)
         }
-    })
-
-    const db = await Recipe.findAll({
-        attributes: ['id', 'image', 'title', 'score'],
-        include: {
-            model: Diet,
-            attributes: ['name'],
-            through: {attributes: []}
-        }
-
-    })
+    
+        else res.json(recipe)
+        
+    } catch (error) {
+        console.log(error)
+    }
+    
     // console.log(db)
 
-    db && db.map((r, i)=> recipe.push({
-        id: db[i].dataValues.id,
-        image: db[i].dataValues.image,
-        title: db[i].dataValues.title,
-        diets: db[i].dataValues.diets.map(d=> d.name),
-        score: db[i].dataValues.score
-    }))
-
-    if(name){
-        let find = recipe && recipe.filter(r=> r.title.toLowerCase().includes(name.toLowerCase()));
-        if(find.length === 0) return res.status(404).json({error: 'No se encontró la receta.'});
-        else res.json(find)
-    }
-
-    else res.json(recipe)
+    
 
 };
 
@@ -136,7 +144,8 @@ const recipeDetail = async(req, res) => {
 const createRecipe = async(req, res) => {
     let {title, image, summary, score, healthScore, diets, steps} = req.body;
     if(title && summary && diets){
-        title = title.toLowerCase()
+        // title = title.toLowerCase()
+        title = title[0].toUpperCase() + title.slice(1);
         let receta = await Recipe.create({
             title,
             image,

@@ -22,6 +22,7 @@ export const SearchBar = (props) => {
     if (!diets.length)dispatch(getDiets())
   })
 
+
   const handlerSubmit = e => {
     e.preventDefault();
     // dispatch(cleanRecipe());
@@ -47,10 +48,10 @@ export const SearchBar = (props) => {
       setReset2(true)
     }
     let az;
-    let az2;
+    let za;
     let minMax;
-    let score;
-    // let maxMin;
+    // let score;
+    let maxMin;
 
     const options = e.target.value;
     const name = e.target.name;
@@ -68,7 +69,7 @@ export const SearchBar = (props) => {
       dispatch(orderFilter(az))	
     }
     if(options === 'ZA'){
-      az2 = recipes.sort(function (a, b) {
+      za = recipes.sort(function (a, b) {
         if (a.title < b.title) {
           return 1;
         }
@@ -78,7 +79,7 @@ export const SearchBar = (props) => {
         return 0;
       });
       dispatch(cleanRecipe())
-      dispatch(orderFilter(az2))	
+      dispatch(orderFilter(za))	
     }
     if(options === 'MinMax'){
       minMax = recipes.sort(function(a, b) {
@@ -88,11 +89,11 @@ export const SearchBar = (props) => {
       dispatch(orderFilter(minMax))	
     }
     if(options === 'MaxMin'){
-      minMax = recipes.sort(function(a, b) {
+      maxMin = recipes.sort(function(a, b) {
         return b.score - a.score;
       });
       dispatch(cleanRecipe())
-      dispatch(orderFilter(minMax))	
+      dispatch(orderFilter(maxMin))	
     }
     else {
       const filter = backup.filter(r => r.diets.includes(options));
@@ -111,29 +112,18 @@ export const SearchBar = (props) => {
       <input className={styles.input} type="text" placeholder="Search by name..." name="name" onChange={e => handlerInputChange(e)}/>
       <button  className={styles.button} type="submit" onClick={(e) => handlerSubmit(e)}>Search</button>
 
-      {/* Orden alfabeticooooooooooo */}
+      {/* Ordeno */}
       <div className={styles.select}>
-        <select onClick={e => handlerFilterDiets(e)} name="Alphabetical">
-          <option selected={reset} disabled={reset2} value='Alphabetical'>Alphabetical</option>
+        <select onClick={e => handlerFilterDiets(e)} name="Sort by">
+          <option selected={reset} disabled={reset2} value='Sort by'>Sort by</option>
           <option value="AZ">A-Z</option>
           <option value="ZA">Z-A</option>
-        </select>
-          <div className={styles.select_arrow}>
-          </div>
-      </div>
-
-      {/* Por scoreeeeeeeeee */}
-      <div className={styles.select}>
-        <select onClick={e => handlerFilterDiets(e)} name="Score">
-          <option selected={reset} disabled={reset2}>Score</option>
           <option value="MinMax">Min - Max</option>
           <option value="MaxMin">Max - Min</option>
         </select>
           <div className={styles.select_arrow}>
           </div>
       </div>
-
-      
 
 
       {/* Filtro por tipos de dieta */}

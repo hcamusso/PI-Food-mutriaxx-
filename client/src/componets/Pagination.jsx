@@ -1,23 +1,28 @@
 import React, {useState, useEffect} from 'react'
+import { useSelector } from 'react-redux'
 import styles from '../styles/recipes.module.css'
 
 
 export const Pagination = ({page, setPage, max}) => {
     
-    
+    const recipes = useSelector(state => state.recipes)
     const [disable, setDisable] = useState(false)
     const [input, setInput] = useState(1)
-    useEffect(() => {
+    // useEffect(() => {
         
-        if(Math.ceil(max) === 1){
-            setDisable(true);
-            setPage(1);
-        }
-        else{
-            setDisable(false)
-        }
-        // console.log(disable)
-    })
+    //     if(Math.ceil(max) === 1){
+    //         setDisable(true);
+    //         setPage(1);
+    //     }
+    //     else{
+    //         setDisable(false)
+    //     }
+    //     // console.log(disable)
+    // })
+
+    useEffect(() => {
+        setPage(1)
+    }, [recipes])
     
     const nextPage = () => {
         if(page < Math.ceil(max)){
