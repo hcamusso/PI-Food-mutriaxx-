@@ -5,7 +5,6 @@ export const GET_DIETS = 'GET_DIETS';
 export const CLEAN_RECIPE = 'CLEAN_RECIPE';
 export const CREATE_RECIPE = 'CREATE_RECIPE';
 export const ORDER_FILTER = 'ORDER_FILTER';
-export const NO_HAY_BACKEND = 'NO_HAY_BACKEND'
 
 
 
@@ -45,9 +44,6 @@ export const getDiets = () => dispatch => {
     .then(json => {
         dispatch({type: 'GET_DIETS', payload: json})
     })
-    .catch(e=>{
-        dispatch({type: 'NO_HAY_BACKEND', payload: {fail: 'No hay backend jejeje'}})
-    })
 };
 
 export const cleanRecipe = () => {
@@ -56,6 +52,7 @@ export const cleanRecipe = () => {
         payload: []
     }
 }
+
 
 
 export const createRecipe = (data) => dispatch => {

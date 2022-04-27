@@ -7,11 +7,12 @@ export const RecipeDetail = (props) => {
   const recipe = useSelector(state => state.recipe);
 
     const dispatch = useDispatch();
+
+    
     React.useEffect(() => {
-        if(!recipe.length){
-          dispatch(getRecipeId(props.match.params.id))
-        }
+      dispatch(getRecipeId(props.match.params.id))
     }, [])
+    console.log(recipe)
   return (
     <div className={styles.fondo}>
     <div className={styles.root}>
