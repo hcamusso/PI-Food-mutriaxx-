@@ -7,6 +7,7 @@ import styles from '../styles/recipes.module.css';
 import error from '../styles/images/404-error.png'
 import React from 'react'
 import { Pagination } from "./Pagination";
+import loading from '../styles/images/loading.gif'
 
 export const Home = (props) => {
     const [page, setPage] = useState(1) //pagina
@@ -33,7 +34,7 @@ export const Home = (props) => {
         <SearchBar/>        
                     
         <div className={styles.root}>
-            {backend.hasOwnProperty('fail') ? <p>No hay backend</p> : recipes.error? <><img className={styles.error} src={error} alt="404 Error"/> <p>Recipe doesn't exist 😕</p> </>: !recipes[0]? <p>cargando...</p> : recipes && recipes.slice((page - 1) * lot, (page - 1) * lot + lot).map((r,i) => {
+            {backend.hasOwnProperty('fail') ? <p>No hay backend</p> : recipes.error? <><img className={styles.error} src={error} alt="404 Error"/> <p>Recipe doesn't exist 😕</p> </>: !recipes[0]? <img src={loading} alt='loading'/> : recipes && recipes.slice((page - 1) * lot, (page - 1) * lot + lot).map((r,i) => {
                 return <RecipeCard key={i} id={r.id} image={r.image} title={r.title} diets={r.diets} score={r.score}/>
             })}
             

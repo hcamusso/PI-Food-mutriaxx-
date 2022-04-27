@@ -138,6 +138,22 @@
     border-radius: 3px;
 }
 
+.buttonoff {
+    display: block;
+	padding: 10px 30px;
+	border-radius: 100px;
+	color: #fff;
+	border:1px solid #5c5c5c;
+	/* background:linear-gradient(to bottom, #ee362d 5%, #fc4141 100%); */
+	background-color:#979797;
+	/* cursor: pointer; */
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
+	transition: .3s ease all;
+    margin-bottom: 20px;
+		
+}
+
 .button {
     display: block;
 	padding: 10px 30px;

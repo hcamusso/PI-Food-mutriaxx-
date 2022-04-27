@@ -244,13 +244,13 @@ class Create extends React.Component {
                         <label className={styles.error}>{this.state.errors.diets && this.state.errors.diets}</label>
                         </div>
                         
-                        <button className={styles.button} disabled={this.state.errors.title || this.state.errors.summary || this.state.errors.score || this.state.errors.healthScore || this.state.errors.steps || this.state.errors.diets || this.state.disabled ? true : false} onClick={(e)=> this.handlerSubmit(e)}>create</button>
+                        <button className={this.state.errors.title || this.state.errors.summary || this.state.errors.score || this.state.errors.healthScore || this.state.errors.steps || this.state.errors.diets || this.state.disabled ? styles.buttonoff :styles.button} disabled={this.state.errors.title || this.state.errors.summary || this.state.errors.score || this.state.errors.healthScore || this.state.errors.steps || this.state.errors.diets || this.state.disabled ? true : false} onClick={(e)=> this.handlerSubmit(e)}>create</button>
                         
                     </form>   
                 </div>
                 <Modal state={this.state.modal}>
                     <div className={styles.content}>
-                        {this.props.info.hasOwnProperty('error') ? <h2>Missing data</h2> : this.props.info.hasOwnProperty('successful') ? <h2>The recipe was created correctly</h2> : <h2>Error</h2>}
+                        {this.props.info.hasOwnProperty('error') ? <h2>Missing data</h2> : this.props.info.hasOwnProperty('successful') ? <h2>The recipe was created correctly</h2> : <h2>...</h2>}
                         {/* <h1>{this.state.info}</h1> */}
                         <br />
                         <Link to='/home'><button className={styles.button}>Done</button></Link>

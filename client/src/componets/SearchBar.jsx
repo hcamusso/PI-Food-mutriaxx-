@@ -9,6 +9,7 @@ export const SearchBar = (props) => {
   const [state, setState] = useState({name: ''});
   const [reset, setReset] = useState(false);
   const [reset2, setReset2] = useState(false);
+  const [errors, setErrors] = useState({})
 
 
   const dispatch = useDispatch();
@@ -22,6 +23,10 @@ export const SearchBar = (props) => {
     if (!diets.length)dispatch(getDiets())
   })
 
+  useEffect(() => {
+    validate()
+}, [state.name]);
+
 
   const handlerSubmit = e => {
     e.preventDefault();
@@ -30,6 +35,19 @@ export const SearchBar = (props) => {
     // e.target.value = '';
   }
 
+  const validate = () => {
+    let error = {}
+    let regularExpresion =  /^[a-zA-Z ]+$/gm;
+    setErrors({});
+    if(state.name){
+      if(!regularExpresion.test(state.name)){
+      error.name = 'Name is not valid'
+    }
+    setErrors(error)
+    }
+    
+  }
+  console.log(errors)
   const handlerInputChange = e => {
     setState({
       ...state,
@@ -109,15 +127,17 @@ export const SearchBar = (props) => {
   return (
     <div className={styles.container}>
       
-      <input className={styles.input} type="text" placeholder="Search by name..." name="name" onChange={e => handlerInputChange(e)}/>
-      <button  className={styles.button} type="submit" onClick={(e) => handlerSubmit(e)}>Search</button>
+      <input className={errors.name ? styles.inputoff : styles.input} type="text" placeholder="Search by name..." name="name" onChange={e => handlerInputChange(e)}/>
+      <button disabled={errors.name ? true : false}  className={errors.name? styles.buttonoff :styles.button} type="submit" onClick={(e) => handlerSubmit(e)}>Search</button>
 
       {/* Ordeno */}
       <div className={styles.select}>
         <select onClick={e => handlerFilterDiets(e)} name="Sort by">
-          <option selected={reset} disabled={reset2} value='Sort by'>Sort by</option>
+          <option selected={reset} disabled={reset2} value='Sort by'>Sort</option>
+          <option disabled value="Alphabetically">alphabetically</option>
           <option value="AZ">A-Z</option>
           <option value="ZA">Z-A</option>
+          <option disabled value="Score">by score</option>
           <option value="MinMax">Min - Max</option>
           <option value="MaxMin">Max - Min</option>
         </select>
@@ -138,6 +158,7 @@ export const SearchBar = (props) => {
         </div>
       </div>
       <button  className={styles.button} type="submit" onClick={() => handleReset()}>All Recipes</button>
+
 
     </div>
   )
