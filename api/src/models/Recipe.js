@@ -26,16 +26,29 @@ module.exports = (sequelize) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false, 
+      validate: {
+        is: /^[a-z ]+$/i
+      }
     },
     summary: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
     score: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false, 
+      validate: {
+        min: 1,
+        max: 100
+      }
     },
     healthScore: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false, 
+      validate: {
+        min: 1,
+        max: 100
+      }
     },
     steps: {
       type: DataTypes.TEXT

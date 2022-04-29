@@ -24,7 +24,6 @@ const rootReducer = (state = initialState, action) => {
 
         }
         
-        
         case ORDER_FILTER:
         return {
             ...state,

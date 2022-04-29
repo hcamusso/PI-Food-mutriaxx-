@@ -13,7 +13,6 @@ export const Home = (props) => {
     const [page, setPage] = useState(1) //pagina
     const [lot, setLot] = useState(9) //lote de recetas
     const recipes = useSelector(state => state.recipes);
-    const backend = useSelector(state => state.backend)
     const max = recipes.length / lot; //numero de paginas
     // console.log(max)
     const dispatch = useDispatch();
@@ -23,7 +22,6 @@ export const Home = (props) => {
     }, [])
     
 
-    console.log(backend)
   return (
     <div>
         <div className={styles.container}>
@@ -34,7 +32,7 @@ export const Home = (props) => {
         <SearchBar/>        
                     
         <div className={styles.root}>
-            {backend.hasOwnProperty('fail') ? <p>No hay backend</p> : recipes.error? <><img className={styles.error} src={error} alt="404 Error"/> <p>Recipe doesn't exist 😕</p> </>: !recipes[0]? <img src={loading} alt='loading'/> : recipes && recipes.slice((page - 1) * lot, (page - 1) * lot + lot).map((r,i) => {
+            {recipes.error? <><img className={styles.error} src={error} alt="404 Error"/> <p>Recipe doesn't exist 😕</p> </>: !recipes[0]? <img src={loading} alt='loading'/> : recipes && recipes.slice((page - 1) * lot, (page - 1) * lot + lot).map((r,i) => {
                 return <RecipeCard key={i} id={r.id} image={r.image} title={r.title} diets={r.diets} score={r.score}/>
             })}
             

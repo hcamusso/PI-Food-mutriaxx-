@@ -44,6 +44,8 @@ const recipeList = async(req, res) => {
     
         })
 
+        // db.map(e => console.log(e.dataValues.diets[0].drtable))
+
         db && db.map((r, i)=> recipe.push({
             id: db[i].dataValues.id,
             image: db[i].dataValues.image,

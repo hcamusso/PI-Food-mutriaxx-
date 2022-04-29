@@ -11,6 +11,7 @@ export const Pagination = ({page, setPage, max}) => {
 
     useEffect(() => {
         setPage(1)
+
     }, [recipes])
     
 

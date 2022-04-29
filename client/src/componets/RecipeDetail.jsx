@@ -12,7 +12,7 @@ export const RecipeDetail = (props) => {
     React.useEffect(() => {
       dispatch(getRecipeId(props.match.params.id))
     }, [])
-    console.log(recipe)
+    // console.log(recipe)
   return (
     <div className={styles.fondo}>
     <div className={styles.root}>

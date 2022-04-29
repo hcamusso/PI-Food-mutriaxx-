@@ -14,7 +14,7 @@ import PageNotFound from './componets/PageNotFound';
 function App() {
   return (
     <div className="App">
-      <Route path={['/recipes/:id', '/home', '/create']} component={NavBar}/>
+      <Route exact path={['/recipes/:id', '/home', '/create']} component={NavBar}/>
       <Switch>
 
         <Route path='/recipes/:id' component={RecipeDetail}/>

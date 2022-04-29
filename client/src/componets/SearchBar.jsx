@@ -47,7 +47,7 @@ export const SearchBar = (props) => {
     }
     
   }
-  console.log(errors)
+  // console.log(recipes)
   const handlerInputChange = e => {
     setState({
       ...state,
@@ -132,7 +132,7 @@ export const SearchBar = (props) => {
 
       {/* Ordeno */}
       <div className={styles.select}>
-        <select onClick={e => handlerFilterDiets(e)} name="Sort by">
+        <select disabled={recipes.error } onClick={e => handlerFilterDiets(e)} name="Sort by">
           <option selected={reset} disabled={reset2} value='Sort by'>Sort</option>
           <option disabled value="Alphabetically">alphabetically</option>
           <option value="AZ">A-Z</option>
@@ -148,7 +148,7 @@ export const SearchBar = (props) => {
 
       {/* Filtro por tipos de dieta */}
       <div className={styles.select}>
-        <select onClick={e => handlerFilterDiets(e)} name="Diets">
+        <select disabled={recipes.error} onClick={e => handlerFilterDiets(e)} name="Diets">
         <option selected={reset} disabled={reset2} key={-1}>Diets</option>
             {diets && diets.map((d,i)=> {
                 return <option key={i} value={d.name}>{d.name}</option>

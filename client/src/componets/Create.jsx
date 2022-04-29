@@ -21,12 +21,12 @@ class Create extends React.Component {
             modal: false,
             // new Array(this.props.diets.length).fill(false)
             errors: {
-                // title: 'Title is required',
-                // summary: 'Summary is required',
-                // score: 'Score is required',
-                // healthScore: 'Health score is required',
-                // steps: 'Instructions are required',
-                // diets: ''
+                title: '',
+                summary: '',
+                score: '',
+                healthScore: '',
+                steps: '',
+                diets: ''
             }
         }
     }
@@ -42,7 +42,14 @@ class Create extends React.Component {
 
         this.setState({
             ...this.state,
-            errors: {}
+            errors: {
+                title: '',
+                summary: '',
+                score: '',
+                healthScore: '',
+                steps: '',
+                diets: ''
+            }
         }, () => {
             let errors = {};
             let regularExpresion =  /^[a-zA-Z ]+$/gm;
