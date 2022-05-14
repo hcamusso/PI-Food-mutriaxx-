@@ -12,7 +12,7 @@
     display: flex;
     flex-direction: column;
     background-color: rgb(255, 255, 255);
-    width: 700px;
+    width: 70%;
     border-radius: 7px;
 }
 
@@ -44,7 +44,7 @@
     -moz-appearance: none;
     appearance: normal;
     font-size: 1em;
-    width: 400px;
+    width: 100%;
     /* width: 400px;
     border-top: 0;
     border-right: 0;
@@ -65,7 +65,7 @@
     display: flex;
     background: rgb(235,50,40);
     background: linear-gradient(180deg, rgba(235,50,40,1) 0%, rgba(255,138,132,1) 100%);
-    width: 700px;
+    width: 100%;
     height: 100px;
     align-items: center;
     justify-content: center;
@@ -82,7 +82,7 @@
 }
 
 .label{
-    width: 400px;
+    width: 70%;
     display: flex;
     text-align: left;
     margin-bottom: 10px;
@@ -101,9 +101,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 70%;
 }
 .form2{
-    width: 400px;
+    width: 100%;
     /* text-align: left; */
     display:flex;
     flex-direction: column;
@@ -182,4 +183,13 @@
 
 input[type=button]:disabled{
     background-color:#5c5c5c;
+}
+
+@media (max-width: 576px) {
+    .container{
+        width: 80%;
+    }
+    .marco p {
+        font-size: 1.5rem;
+    }
 }

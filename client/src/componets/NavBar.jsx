@@ -8,11 +8,10 @@ export const NavBar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
-        <img className={styles.icon} src={logo} alt="" />
-        <p>CookBook</p>
+        <Link className={styles.link} to='/home'><img className={styles.icon} src={logo} alt="" />
+        <p>CookBook</p></Link>
       </div>
       <div className={styles.menu}>
-        <Link to='/home'><li>Home</li></Link>
         <Link to='/create'><li>Create Recipe</li></Link>
       </div>
         

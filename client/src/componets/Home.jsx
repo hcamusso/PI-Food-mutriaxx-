@@ -11,7 +11,7 @@ import loading from '../styles/images/loading.gif'
 
 export const Home = (props) => {
     const [page, setPage] = useState(1) //pagina
-    const [lot, setLot] = useState(9) //lote de recetas
+    const [lot, setLot] = useState(6) //lote de recetas
     const recipes = useSelector(state => state.recipes);
     const max = recipes.length / lot; //numero de paginas
     // console.log(max)
@@ -23,7 +23,7 @@ export const Home = (props) => {
     
 
   return (
-    <div>
+    <>
         <div className={styles.container}>
             <h1 className={styles.title}>Simple and Tasty Recipes<span>&#160;</span></h1>
             <p>Find cooking inspiration on <b>CookBook</b>. Discover recipes and how-tos based on the food you love 💛.</p>
@@ -39,7 +39,7 @@ export const Home = (props) => {
         </div>
         {recipes[0] && <Pagination page={page} setPage={setPage} setLote={setLot} max={max}/>}
 
-    </div>
+    </>
         
   )
 }

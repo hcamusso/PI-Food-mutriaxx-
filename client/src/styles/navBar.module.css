@@ -5,6 +5,40 @@
     /* background-color: white; */
     justify-content: space-between;
 }
+.link{
+    display: flex;
+    align-items: center;
+    color: black;
+}
+@media (max-width: 600px){
+    .container{
+        width: auto;
+    }
+}
+
+/* @media (max-width: 599px){
+    .container{
+        width: 60%;
+    }
+} */
+
+@media (max-width: 380px){
+    .container{
+        width: auto;
+    }
+    .menu{
+        display: flex;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin: 5px;
+        color: black;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-content: center;
+    }
+}
 
 .logo {
     margin-left: 20px;
@@ -26,6 +60,7 @@
 .menu, li{
     display: flex;
     margin-right: 20px;
+    margin-left: 20px;
     justify-content: space-between;
     color: black;
 }

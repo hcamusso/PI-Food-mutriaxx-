@@ -31,7 +31,9 @@ export const SearchBar = (props) => {
   const handlerSubmit = e => {
     e.preventDefault();
     // dispatch(cleanRecipe());
-    dispatch(getRecipeName(state.name));
+    
+    state.name ? dispatch(getRecipeName(state.name)) : alert('name is required')
+    setState({...state, name: ' '})
     // e.target.value = '';
   }
 
@@ -49,16 +51,20 @@ export const SearchBar = (props) => {
   }
   // console.log(recipes)
   const handlerInputChange = e => {
-    setState({
+    
+      setState({
       ...state,
       name: e.target.value
     })
+    
+    
   }
 
   const handleReset = () => {
-    dispatch(getAllRecipes());
     setReset(true);
-    setReset2(true);
+    // setReset2(true);
+    dispatch(cleanRecipe());
+    dispatch(orderFilter(backup));
   }
 
   const handlerFilterDiets= e => {
@@ -73,6 +79,10 @@ export const SearchBar = (props) => {
 
     const options = e.target.value;
     const name = e.target.name;
+    if(options === 'Sort by'){
+      dispatch(cleanRecipe())	
+      dispatch(orderFilter(backup))	
+    }
     if(options === 'AZ'){
       az = recipes.sort(function (a, b) {
         if (a.title > b.title) {
@@ -127,13 +137,13 @@ export const SearchBar = (props) => {
   return (
     <div className={styles.container}>
       
-      <input className={errors.name ? styles.inputoff : styles.input} type="text" placeholder="Search by name..." name="name" onChange={e => handlerInputChange(e)}/>
+      <input className={errors.name ? styles.inputoff : styles.input} type="text" placeholder="Search by name..." value={state.name} name="name" onChange={e => handlerInputChange(e)}/>
       <button disabled={errors.name ? true : false}  className={errors.name? styles.buttonoff :styles.button} type="submit" onClick={(e) => handlerSubmit(e)}>Search</button>
 
       {/* Ordeno */}
       <div className={styles.select}>
-        <select disabled={recipes.error } onClick={e => handlerFilterDiets(e)} name="Sort by">
-          <option selected={reset} disabled={reset2} value='Sort by'>Sort</option>
+        <select disabled={recipes.error } onClick={e => handlerFilterDiets(e)} name="Sort">
+          <option selected={reset} disabled={reset2} value='Sort'>Sort</option>
           <option disabled value="Alphabetically">alphabetically</option>
           <option value="AZ">A-Z</option>
           <option value="ZA">Z-A</option>
